@@ -309,7 +309,7 @@ def run_browser_app(assistant) -> None:
     url = f"http://127.0.0.1:{port}/"
     _write_current_launch_url(assistant, url)
 
-    print(f"Prompt Assistant browser app running at {url}")
+    print(f"PROMPTER browser app running at {url}")
     threading.Timer(0.6, lambda: webbrowser.open(url)).start()
     try:
         server.serve_forever()
@@ -539,7 +539,7 @@ def _render_page(
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Prompt Assistant Beta</title>
+    <title>PROMPTER</title>
     <style>
       :root {{
         --bg: #f7f1e7;
@@ -812,7 +812,7 @@ def _render_page(
   </head>
   <body>
     <main>
-      <h1>Prompt Assistant Beta</h1>
+      <h1>PROMPTER</h1>
       <p class="subcopy">Refine prompts, find ready-made prompts, and save tokens without getting lost in a complicated workflow.</p>
       {flash}
       <section class="panel hero">

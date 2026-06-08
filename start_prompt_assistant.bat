@@ -18,7 +18,7 @@ set "EXIT_CODE=%ERRORLEVEL%"
 
 if not "%EXIT_CODE%"=="0" (
   echo.
-  echo Prompt Assistant closed with an error. See:
+  echo PROMPTER closed with an error. See:
   echo %PROMPT_ASSISTANT_HOME%\launch-session.log
   pause
 )

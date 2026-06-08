@@ -1,8 +1,8 @@
 [project]
-name = "project_360_degree_ai_prompt_assistant_platform"
+name = "prompter"
 version = "0.2.0"
-description = "Local-first prompt assistant MVP built from a CrewAI planning scaffold"
-authors = [{ name = "Your Name", email = "you@example.com" }]
+description = "PROMPTER is a local-first browser app that refines prompts, surfaces ready-made prompt matches, and helps reduce token waste."
+authors = [{ name = "Kunal", email = "kunal@local.dev" }]
 requires-python = ">=3.10,<3.14"
 dependencies = [
     "crewai[file-processing,litellm,tools]==1.14.4",
@@ -18,6 +18,8 @@ release = [
 project_360_degree_ai_prompt_assistant_platform = "project_360_degree_ai_prompt_assistant_platform.main:main"
 prompt_assistant = "project_360_degree_ai_prompt_assistant_platform.main:main"
 prompt_assistant_beta = "project_360_degree_ai_prompt_assistant_platform.packaged_browser_launcher:main"
+prompter = "project_360_degree_ai_prompt_assistant_platform.main:main"
+prompter_beta = "project_360_degree_ai_prompt_assistant_platform.packaged_browser_launcher:main"
 run_crew = "project_360_degree_ai_prompt_assistant_platform.main:run"
 train = "project_360_degree_ai_prompt_assistant_platform.main:train"
 replay = "project_360_degree_ai_prompt_assistant_platform.main:replay"

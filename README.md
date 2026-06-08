@@ -1,6 +1,6 @@
-# Prompt Assistant MVP
+# PROMPTER
 
-Prompt Assistant is a local-first browser app with two core actions:
+PROMPTER is a local-first browser app with two core actions:
 
 1. `Refine Prompt`
 2. `Open Prompt Library`
@@ -8,10 +8,10 @@ Prompt Assistant is a local-first browser app with two core actions:
 The goal is simple:
 
 - turn a rough prompt into a stronger final prompt
-- show more efficient prompt versions
+- show more efficient prompt versions that help reduce wasted tokens
 - help users find ready-made prompts quickly from one unified library
 
-## Current MVP
+## What PROMPTER Does
 
 The browser MVP focuses on one clear flow:
 
@@ -27,25 +27,41 @@ The app currently includes:
 - approximate token-efficiency comparison
 - a unified prompt library
 - category-based library browsing
+- top prompt matches inside each category
 - local prompt history
 - bundled open-source prompt references
 
-## Run The App
+## Quick Feature Brief
 
-### Fastest local launch
+- `Refine Prompt`: clean up a rough prompt, make it clearer, and reduce ambiguity
+- `Prompt Library`: choose a category, see the strongest prompt matches, then use or adapt one
+- `Token Saving`: compare prompt versions and pick the one that is likely to use fewer tokens
+- `Light Cleanup`: common typo and rough-format cleanup support before prompt rebuilding
 
-On Windows, double-click:
+## Download And Run
+
+### 1. Download the project
+
+Download or clone this repository to your computer.
+
+### 2. Open the app on Windows
+
+Double-click:
+
+`PROMPTER.bat`
+
+If you prefer, you can also use:
 
 `start_prompt_assistant.bat`
 
-This opens the browser MVP directly.
+This opens the browser MVP directly in your local browser.
 
 Keep the launcher window open while the app is running. The app will also
 write its active local link to:
 
 `.\.prompt_assistant\current_url.txt`
 
-### Command line
+### 3. Optional command line launch
 
 From the project folder:
 
@@ -80,6 +96,16 @@ The intended MVP experience is:
 2. see the top matching prompts
 3. choose one prompt
 4. either use it directly or adapt it to the user's need
+
+## Why It Saves Tokens
+
+PROMPTER helps save cost by reducing ambiguity and retries:
+
+- clearer prompts mean fewer back-and-forth correction turns
+- structured prompt options reduce wasted output
+- token-efficiency hints help users choose a leaner version when needed
+
+It is not only about shorter prompts. It is about getting to a usable result faster.
 
 ## Build A Windows Beta
 
@@ -118,6 +144,7 @@ tests/
 ## Notes
 
 - The browser MVP is the main product path.
+- The product-facing name is `PROMPTER`.
 - The old CrewAI scaffold is still in the codebase, but it is not the main user experience.
 - The desktop runtime path is not the primary MVP path.
 - Future work may add a hybrid retrieval layer, but the current MVP stays local-first.
