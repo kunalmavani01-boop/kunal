@@ -1,67 +1,74 @@
 # PROMPTER
 
-PROMPTER is a local-first browser app with two core actions:
+PROMPTER is a local-first browser app that helps turn rough prompts into clearer, stronger prompts without making users learn prompt engineering from scratch.
 
-1. `Refine Prompt`
-2. `Open Prompt Library`
+It focuses on two practical jobs:
 
-The goal is simple:
+1. refine a rough prompt into a stronger final prompt
+2. help users start faster with a curated prompt library
 
-- turn a rough prompt into a stronger final prompt
-- show more efficient prompt versions that help reduce wasted tokens
-- help users find ready-made prompts quickly from one unified library
+![PROMPTER browser MVP](docs/prompter-browser-mvp.png)
 
-## What PROMPTER Does
+## Why it exists
 
-The browser MVP focuses on one clear flow:
+Most people do not need a giant prompt theory course. They need help getting from:
+
+- "here is my messy idea"
+
+to:
+
+- "here is a prompt I can actually use right now"
+
+PROMPTER is designed to make that jump faster by improving structure, reducing ambiguity, and surfacing stronger prompt starting points.
+
+## What it does today
+
+- local browser-first interface
+- rough prompt cleanup and refinement
+- final prompt output plus alternate prompt versions
+- guided prompt building for more structured use cases
+- prompt packs and library browsing
+- token-efficiency comparison hints
+- local prompt history
+
+## Core flow
 
 1. paste a rough prompt or idea
-2. click `Refine Prompt`
-3. get a final prompt plus alternate versions
-4. optionally open the prompt library and adapt a ready-made prompt
+2. choose a mode such as quick, guided, or expert
+3. refine the prompt into a clearer final version
+4. optionally browse starter packs and adapt a ready-made prompt
 
-The app currently includes:
+## Example use cases
 
-- a browser-first local UI
-- prompt refinement with a final prompt output
-- approximate token-efficiency comparison
-- a unified prompt library
-- category-based library browsing
-- top prompt matches inside each category
-- local prompt history
-- bundled open-source prompt references
+- founders shaping MVP ideas
+- marketers tightening copy prompts
+- students improving study prompts
+- creators building content prompts
+- developers clarifying debugging or build prompts
 
-## Quick Feature Brief
+## What makes it different
 
-- `Refine Prompt`: clean up a rough prompt, make it clearer, and reduce ambiguity
-- `Prompt Library`: choose a category, see the strongest prompt matches, then use or adapt one
-- `Token Saving`: compare prompt versions and pick the one that is likely to use fewer tokens
-- `Light Cleanup`: common typo and rough-format cleanup support before prompt rebuilding
+- local-first by default
+- browser-based instead of chat-only
+- built around practical prompt repair, not abstract theory
+- includes starter packs for common real-world workflows
+- tries to reduce wasted retries and token spend
 
-## Download And Run
+## Quick start
 
-### 1. Download the project
+### Windows launcher
 
-Download or clone this repository to your computer.
-
-### 2. Open the app on Windows
-
-Double-click:
+From the project folder, double-click:
 
 `PROMPTER.bat`
 
-If you prefer, you can also use:
+You can also use:
 
 `start_prompt_assistant.bat`
 
-This opens the browser MVP directly in your local browser.
+Keep the launcher window open while the app is running.
 
-Keep the launcher window open while the app is running. The app will also
-write its active local link to:
-
-`.\.prompt_assistant\current_url.txt`
-
-### 3. Optional command line launch
+### Command line
 
 From the project folder:
 
@@ -69,61 +76,34 @@ From the project folder:
 prompt_assistant web
 ```
 
-## Main User Flows
+The app writes its active local URL to:
 
-### 1. Refine Prompt
+`.\.prompt_assistant\current_url.txt`
 
-Use this when the user already has a rough prompt.
+## Install for development
 
-The app:
+PROMPTER expects the local virtual environment already used by this repo.
 
-- analyzes the prompt
-- improves structure
-- reduces ambiguity
-- shows a final prompt
-- shows alternate prompt versions such as:
-  - most efficient
-  - balanced
-  - deeper reasoning
+Key project commands are exposed through `pyproject.toml`, including:
 
-### 2. Open Prompt Library
+- `prompt_assistant`
+- `prompter`
+- `prompt_assistant_beta`
+- `prompter_beta`
 
-Use this when the user wants a strong starting point from the library.
+## Windows beta packaging
 
-The intended MVP experience is:
-
-1. choose a category
-2. see the top matching prompts
-3. choose one prompt
-4. either use it directly or adapt it to the user's need
-
-## Why It Saves Tokens
-
-PROMPTER helps save cost by reducing ambiguity and retries:
-
-- clearer prompts mean fewer back-and-forth correction turns
-- structured prompt options reduce wasted output
-- token-efficiency hints help users choose a leaner version when needed
-
-It is not only about shorter prompts. It is about getting to a usable result faster.
-
-## Build A Windows Beta
-
-The project includes a Windows packaging script for a portable `.exe` build:
+To build a portable Windows beta:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\release\build_windows_exe.ps1
 ```
 
-Then open the newest packaged build from the latest folder inside:
+The newest packaged build will appear in:
 
 `release-build\`
 
-For normal MVP use during development, the main launch path is:
-
-`start_prompt_assistant.bat`
-
-## Project Layout
+## Project layout
 
 ```text
 src/project_360_degree_ai_prompt_assistant_platform/
@@ -139,12 +119,27 @@ release/
   PromptAssistantBeta.spec
 
 tests/
+docs/
 ```
+
+## Current product status
+
+PROMPTER is currently a browser MVP with a local-first workflow.
+
+- the product-facing name is `PROMPTER`
+- the main experience is the browser app
+- the older CrewAI scaffold still exists in the codebase
+- a hosted public demo is not the primary path yet
+
+## Good first feedback
+
+If you try it, the most useful feedback is:
+
+- was the refined prompt clearly better than the original
+- did the starter pack flow make sense
+- which user type this feels most useful for
+- where the flow feels confusing or too manual
 
 ## Notes
 
-- The browser MVP is the main product path.
-- The product-facing name is `PROMPTER`.
-- The old CrewAI scaffold is still in the codebase, but it is not the main user experience.
-- The desktop runtime path is not the primary MVP path.
-- Future work may add a hybrid retrieval layer, but the current MVP stays local-first.
+This repo is being shaped into a cleaner public product surface. Internal package names still reflect the earlier project scaffold in some places, but the product name and launch direction are now centered on `PROMPTER`.
