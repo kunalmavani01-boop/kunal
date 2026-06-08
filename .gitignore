@@ -1,0 +1,23 @@
+.env
+.venv/
+.prompt_assistant/
+__pycache__/
+.DS_Store
+*.pyc
+*.pyo
+*.log
+
+# Build and release artifacts
+build/
+dist/
+beta-bundle/
+release-build/
+Prompt-Assistant-Beta.zip
+video-check/
+
+# Local launcher notes
+LATEST-BETA-BUILD.txt
+knowledge/
+
+# OS/editor noise
+Thumbs.db

@@ -1,0 +1,370 @@
+[
+  {
+    "title": "Weekly Planning Coach",
+    "prompt_text": "Act as a weekly productivity coach. Reflect on the following input from my past week: {past_week_summary}. Based on that, generate a plan for the coming week, including top 3 goals, habits to track, and key lessons.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["planning", "weekly_review", "focus"]
+  },
+  {
+    "title": "Time Blocking Scheduler",
+    "prompt_text": "You are a time-blocking expert. I will give you my tasks for today: {task_list}. Arrange them into a realistic hourly schedule from 9AM-6PM with focus blocks, breaks, and buffer time.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["time_management", "calendar", "execution"]
+  },
+  {
+    "title": "Learn Anything 10x Faster",
+    "prompt_text": "I want to learn {your_topic}. Create a 4-week learning roadmap using fast learning techniques like active recall, Feynman technique, spaced repetition, and real-world practice.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["learning", "accelerated_learning", "education"]
+  },
+  {
+    "title": "Daily Standup Reflector",
+    "prompt_text": "Ask me: 1) What did I do yesterday? 2) What is the plan today? 3) What is blocking me? Then respond with encouragement and a focus reminder.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["standup", "agile", "self_management"]
+  },
+  {
+    "title": "Eisenhower Prioritizer",
+    "prompt_text": "Here is my current list of tasks: {task_list}. Categorize them into the Eisenhower matrix and suggest what I should Do, Schedule, Delegate, or Delete.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["prioritization", "decision_making", "productivity"]
+  },
+  {
+    "title": "Digital Brain Architect",
+    "prompt_text": "I want to build a second brain for {your_use_case} using Notion. Help me create a dashboard structure, templates, and tagging system.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["pkm", "notion", "digital_brain"]
+  },
+  {
+    "title": "Decision Clarity Sheet",
+    "prompt_text": "Help me decide: {your_decision}. Ask me clarifying questions, list pros and cons, and help simulate possible outcomes.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["decisions", "clarity", "life_planning"]
+  },
+  {
+    "title": "Email Rewrite Assistant",
+    "prompt_text": "Here is a messy email draft: {your_draft}. Rewrite it to be clear, concise, and polite, but still assertive.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["communication", "email", "writing"]
+  },
+  {
+    "title": "Productivity Systems Generator",
+    "prompt_text": "I am a {role_or_personality} who struggles with {problem}. Suggest a personal productivity system that suits me and helps solve this.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["systems", "habit_design", "self_optimization"]
+  },
+  {
+    "title": "Anti-Burnout Planner",
+    "prompt_text": "I am feeling overwhelmed. Help me redesign my weekly schedule for energy balance, rest, deep work, and recovery activities.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["burnout", "mental_health", "energy_management"]
+  },
+  {
+    "title": "Personal OKRs Generator",
+    "prompt_text": "Help me set personal OKRs for the next quarter around {focus_area}. I want 3 objectives, each with measurable key results.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["okrs", "goals", "quarterly_planning"]
+  },
+  {
+    "title": "Deep Work Mode Enabler",
+    "prompt_text": "I need to focus deeply on {task}. Create a 2-hour deep work ritual with setup steps, distraction blockers, and a shutdown routine.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["deep_work", "focus", "rituals"]
+  },
+  {
+    "title": "Digital Detox Planner",
+    "prompt_text": "Build me a realistic 7-day digital detox plan that reduces my screen time without harming my work. Include boundaries, replacements, and daily check-ins.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["digital_detox", "screen_time", "wellbeing"]
+  },
+  {
+    "title": "Personal Manifesto Writer",
+    "prompt_text": "Guide me through writing a 1-page personal manifesto about my values, identity, non-negotiables, and vision.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["values", "identity", "vision"]
+  },
+  {
+    "title": "Creative Brainstorm Facilitator",
+    "prompt_text": "Facilitate a brainstorming session for {problem_or_topic}. Give me 20 ideas, then group them into themes and suggest the top 3 to pursue first.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["brainstorming", "ideation", "creativity"]
+  },
+  {
+    "title": "Communication Tone Adjuster",
+    "prompt_text": "Rewrite this message in a {desired_tone} tone: {original_text}. Keep all key points but adapt voice and length.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["writing", "tone", "communication"]
+  },
+  {
+    "title": "Presentation Outline Builder",
+    "prompt_text": "Create a 10-slide presentation outline on {topic} for {audience}. Include the title of each slide, the main point, and one supporting example.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["presentation", "slides", "structure"]
+  },
+  {
+    "title": "Grant Proposal Drafting Assistant",
+    "prompt_text": "Help me draft a grant proposal for {project}. Structure it with problem, impact, methodology, budget logic, and expected outcomes.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["proposal", "funding", "nonprofit"]
+  },
+  {
+    "title": "Weekly Theme Planner",
+    "prompt_text": "Give me a weekly theme based on my priorities: {priorities}. Build a simple plan that keeps all major tasks aligned to that theme.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["planning", "theme", "focus"]
+  },
+  {
+    "title": "Creative Constraint Generator",
+    "prompt_text": "I am stuck on {creative_task}. Give me 10 useful creative constraints that can make the work sharper, more original, and easier to finish.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["creative", "constraints", "originality"]
+  },
+  {
+    "title": "Meeting Prep Snapshot",
+    "prompt_text": "I have an upcoming meeting about {meeting_topic}. Help me prepare a one-page brief with goals, questions, risks, and desired outcomes.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["meeting", "brief", "preparation"]
+  },
+  {
+    "title": "Priority Funnel Designer",
+    "prompt_text": "Help me reduce these priorities into one ranked list: {priority_list}. Show what to do now, later, delegate, or drop.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["priorities", "focus", "triage"]
+  },
+  {
+    "title": "Focused Reading Plan",
+    "prompt_text": "I want to deeply understand {topic_or_book}. Create a reading plan with sections to focus on, note prompts, and recall questions.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["reading", "learning", "study"]
+  },
+  {
+    "title": "Strategic Pause Prompter",
+    "prompt_text": "Before I act on this situation: {situation}, ask me the best reflection questions to slow down, see blind spots, and choose a better next move.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["reflection", "decision_making", "strategy"]
+  },
+  {
+    "title": "Bug Reproduction Assistant",
+    "prompt_text": "Here is a bug report: {bug_description}. Create a minimal code snippet that reproduces this issue.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["debugging", "reproduction", "triage"]
+  },
+  {
+    "title": "Code Review Coach",
+    "prompt_text": "Review this code in {language}: {paste_code}. Point out style issues, performance concerns, and suggest improvements.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["code_review", "quality", "refactoring"]
+  },
+  {
+    "title": "API Endpoint Designer",
+    "prompt_text": "Design a REST API for {resource_description}, including endpoints, payload schemas, and HTTP methods.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["api", "design", "schema"]
+  },
+  {
+    "title": "Infrastructure-as-Code Generator",
+    "prompt_text": "Create Terraform code to provision a {cloud_provider} setup with VPC, subnets, and an RDS instance.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["iac", "terraform", "cloudformation"]
+  },
+  {
+    "title": "Logging & Monitoring Setup",
+    "prompt_text": "Recommend a logging and monitoring stack for {language_or_platform} services, including metrics, dashboards, and alerts.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["monitoring", "observability", "alerts"]
+  },
+  {
+    "title": "Feature Flag Strategy",
+    "prompt_text": "Outline a feature flag strategy for rolling out {feature_name}, including who toggles flags and a rollback plan.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["feature_flags", "releases", "ab_testing"]
+  },
+  {
+    "title": "OAuth Integration Example",
+    "prompt_text": "Show how to integrate GitHub OAuth login in a Node.js and Express app, including callback handling and token storage.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["security", "oauth", "authentication"]
+  },
+  {
+    "title": "Legacy API Wrapper Creator",
+    "prompt_text": "Wrap this old XML-based API into a clean JSON REST interface in {language}.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["wrappers", "api", "modernization"]
+  },
+  {
+    "title": "Feature Roadmap Visualizer",
+    "prompt_text": "Here are upcoming features: {list}. Create a quarterly roadmap with milestones and dependencies.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["roadmap", "planning", "visualization"]
+  },
+  {
+    "title": "Cross-Browser Testing Plan",
+    "prompt_text": "Recommend tools, frameworks, and test cases to cover Chrome, Firefox, Safari, and mobile browsers.",
+    "source_label": "awesome-ai-prompts",
+    "source_url": "https://github.com/0x2e-Tech/awesome-ai-prompts",
+    "origin": "remote",
+    "keywords": ["testing", "cross_browser", "qa"]
+  },
+  {
+    "title": "MVP Scope Critic",
+    "prompt_text": "I have this startup idea: {idea}. Define the narrowest MVP that can validate demand, list what must stay in version one, what should be cut, and the success metric to watch first.",
+    "source_label": "bundled-open-source",
+    "source_url": "local-seed",
+    "origin": "remote",
+    "keywords": ["mvp", "scope", "startup", "validation"]
+  },
+  {
+    "title": "Positioning Angle Builder",
+    "prompt_text": "For this product: {product}. Create three strong positioning angles based on the audience, the painful problem, the differentiator, and the clearest promise we can make.",
+    "source_label": "bundled-open-source",
+    "source_url": "local-seed",
+    "origin": "remote",
+    "keywords": ["positioning", "product_strategy", "messaging", "audience"]
+  },
+  {
+    "title": "Market Gap Scanner",
+    "prompt_text": "Analyze this business idea: {idea}. Identify the customer problem, what alternatives exist today, what market gap may still be open, and what evidence I should collect next.",
+    "source_label": "bundled-open-source",
+    "source_url": "local-seed",
+    "origin": "remote",
+    "keywords": ["market_gap", "validation", "research", "founder"]
+  },
+  {
+    "title": "Founder Problem Interview Prep",
+    "prompt_text": "I want to validate this startup problem: {problem}. Write 12 interview questions that uncover current behavior, workarounds, urgency, and willingness to pay without leading the user.",
+    "source_label": "bundled-open-source",
+    "source_url": "local-seed",
+    "origin": "remote",
+    "keywords": ["user_research", "validation", "startup", "interview"]
+  },
+  {
+    "title": "Feature Priority Matrix",
+    "prompt_text": "Here is my product idea and feature list: {idea_and_features}. Rank the features into must-have, should-have, nice-to-have, and not-now based on user value, launch risk, and speed.",
+    "source_label": "bundled-open-source",
+    "source_url": "local-seed",
+    "origin": "remote",
+    "keywords": ["feature_priority", "product_strategy", "roadmap", "mvp"]
+  },
+  {
+    "title": "Landing Page Messaging Sprint",
+    "prompt_text": "Use this product idea: {product}. Write a landing page messaging draft with headline, subheadline, problem, solution, proof, objection handling, and CTA.",
+    "source_label": "bundled-open-source",
+    "source_url": "local-seed",
+    "origin": "remote",
+    "keywords": ["landing_page", "copy", "messaging", "cta"]
+  },
+  {
+    "title": "Homepage Wireframe Prompt",
+    "prompt_text": "For this website or SaaS offer: {offer}. Propose a homepage structure section by section, explaining what each section should communicate and why it belongs there.",
+    "source_label": "bundled-open-source",
+    "source_url": "local-seed",
+    "origin": "remote",
+    "keywords": ["website", "homepage", "structure", "ux_copy"]
+  },
+  {
+    "title": "Cold Outreach Personalizer",
+    "prompt_text": "Write a short outreach email for {offer} to {recipient_type}. Personalize it based on this context: {context}. Keep it concise, specific, and easy to reply to.",
+    "source_label": "bundled-open-source",
+    "source_url": "local-seed",
+    "origin": "remote",
+    "keywords": ["email", "outreach", "sales", "personalization"]
+  },
+  {
+    "title": "Proposal Scoping Assistant",
+    "prompt_text": "Create a client proposal for {service}. Include scope, deliverables, timeline, pricing logic, assumptions, and a next-step CTA in a clear structure.",
+    "source_label": "bundled-open-source",
+    "source_url": "local-seed",
+    "origin": "remote",
+    "keywords": ["proposal", "scope", "deliverables", "pricing"]
+  },
+  {
+    "title": "Research Brief Generator",
+    "prompt_text": "Turn this topic into a research brief: {topic}. Clarify the question, assumptions, required evidence, risks, and what a strong conclusion would need to prove.",
+    "source_label": "bundled-open-source",
+    "source_url": "local-seed",
+    "origin": "remote",
+    "keywords": ["research", "analysis", "brief", "evidence"]
+  },
+  {
+    "title": "Study Guide Compression Prompt",
+    "prompt_text": "I need to learn this quickly: {topic}. Create a compressed study guide with the core ideas, memory hooks, practice questions, and the smallest set of things I must remember.",
+    "source_label": "bundled-open-source",
+    "source_url": "local-seed",
+    "origin": "remote",
+    "keywords": ["study", "learning", "revision", "exam"]
+  },
+  {
+    "title": "Scene Beat Builder",
+    "prompt_text": "For this screenplay idea: {idea}. Build the next scene with the character goal, conflict, turn, emotional beat, and what should change by the end.",
+    "source_label": "bundled-open-source",
+    "source_url": "local-seed",
+    "origin": "remote",
+    "keywords": ["screenplay", "scene", "story", "character"]
+  }
+]

@@ -1,0 +1,35 @@
+[project]
+name = "project_360_degree_ai_prompt_assistant_platform"
+version = "0.2.0"
+description = "Local-first prompt assistant MVP built from a CrewAI planning scaffold"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[file-processing,litellm,tools]==1.14.4",
+    "pydantic",
+]
+
+[project.optional-dependencies]
+release = [
+    "pyinstaller>=6.0,<7.0",
+]
+
+[project.scripts]
+project_360_degree_ai_prompt_assistant_platform = "project_360_degree_ai_prompt_assistant_platform.main:main"
+prompt_assistant = "project_360_degree_ai_prompt_assistant_platform.main:main"
+prompt_assistant_beta = "project_360_degree_ai_prompt_assistant_platform.packaged_browser_launcher:main"
+run_crew = "project_360_degree_ai_prompt_assistant_platform.main:run"
+train = "project_360_degree_ai_prompt_assistant_platform.main:train"
+replay = "project_360_degree_ai_prompt_assistant_platform.main:replay"
+test = "project_360_degree_ai_prompt_assistant_platform.main:test"
+run_with_trigger = "project_360_degree_ai_prompt_assistant_platform.main:run_with_trigger"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"
+
+[tool.uv]
+override-dependencies = ["litellm<=1.82.6"]

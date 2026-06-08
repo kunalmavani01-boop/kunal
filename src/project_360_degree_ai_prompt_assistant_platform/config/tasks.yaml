@@ -1,0 +1,142 @@
+---
+cli_core_architecture:
+  description: 'Design the roadmap for a Python-based CLI interface. Define the MVP
+    scope: Input prompt -> Memory Retrieval -> LLM Processing -> Terminal Output.'
+  expected_output: 'A comprehensive CLI architecture document including: Python CLI
+    framework selection, command structure design, input/output flow specification,
+    memory integration points, LLM processing pipeline, and terminal output formatting.
+    Include technical implementation roadmap and MVP scope definition.'
+  agent: senior_project_manager
+local_first_memory_store:
+  description: Implement a vector database (like ChromaDB) that runs locally. Build
+    the logic for encrypted 'Zero-Knowledge' data storage.
+  expected_output: 'Complete local vector database implementation including: ChromaDB
+    setup and configuration, local encryption protocols, zero-knowledge data storage
+    architecture, vector embedding management, secure retrieval mechanisms, and database
+    schema design. Include code examples and security documentation.'
+  agent: backend_python_engineer
+  context:
+  - cli_core_architecture
+optimization_engine_logic:
+  description: Define the prompt improvement algorithms. Test them via the CLI script
+    to ensure they work without a UI.
+  expected_output: 'Complete prompt optimization engine specification including: improvement
+    algorithms design, CLI testing framework, prompt analysis logic, optimization
+    strategies, performance metrics, and validation methods. Include working CLI implementation
+    and test results demonstrating optimization effectiveness.'
+  agent: ai_prompt_engineering_researcher
+  context:
+  - cli_core_architecture
+  - local_first_memory_store
+privacy_audit_legal_framework:
+  description: Define the 'User Ownership' protocols. Map out how we ensure no data
+    leaves the local machine without encryption.
+  expected_output: 'Comprehensive privacy and legal framework including: user data
+    ownership protocols, local-first privacy guarantees, encryption standards, data
+    sovereignty policies, compliance requirements, privacy audit checklist, and legal
+    risk assessment. Include specific technical safeguards and user control mechanisms.'
+  agent: legal_ip_compliance_lead
+  context:
+  - local_first_memory_store
+adaptive_learning_loop:
+  description: Design the feedback loop logic where user corrections are saved to
+    the local vector DB for future prompt refinement.
+  expected_output: 'Complete adaptive learning system design including: feedback collection
+    mechanisms, correction processing logic, vector database update protocols, learning
+    loop algorithms, improvement tracking metrics, and continuous refinement strategies.
+    Include implementation specifications for local knowledge accumulation.'
+  agent: r_d_market_scout
+  context:
+  - local_first_memory_store
+  - optimization_engine_logic
+python_quality_audit:
+  description: Review the Python codebase for integration bugs, runtime failures,
+    weak routing logic, open-ended prompt generation, edge cases, and maintainability
+    issues across the browser beta, local memory, prompt library, and CLI pathways.
+    Propose and implement concrete fixes for anything that blocks a stable beta experience.
+  expected_output: 'A Python engineering audit including: identified bugs and runtime
+    risks, concrete fixes applied or recommended, verification steps taken, known
+    environment-specific blockers, and a stability summary for the desktop beta and
+    local-first product flows.'
+  agent: python_engineer
+  context:
+  - cli_core_architecture
+  - local_first_memory_store
+  - optimization_engine_logic
+  - adaptive_learning_loop
+backend_beta_stabilization:
+  description: Harden the browser beta backend so prompt intent routing, pack matching,
+    archetype selection, token-efficiency hints, typo cleanup, and final prompt generation
+    work reliably across business, creative, technical, and research use cases.
+  expected_output: 'A backend stabilization pass including: stronger pack routing,
+    safer fallback rules, cleaner prompt assembly, token-efficiency estimation logic,
+    reduced open-ended outputs, and verification across representative beta scenarios.'
+  agent: backend_python_engineer
+  context:
+  - optimization_engine_logic
+  - python_quality_audit
+frontend_beta_experience:
+  description: Redesign the browser beta around a simpler library-first experience.
+    Replace heavy pack emphasis with a cleaner library selector, recommended library
+    option, related cards, clearer final prompt presentation, and a more appealing
+    responsive layout informed by strong web product references.
+  expected_output: 'A frontend beta polish plan and implementation guidance covering:
+    simplified library selection, stronger visual hierarchy, improved prompt/result
+    layout, better card presentation, mobile and desktop responsiveness, and a cleaner
+    product feel backed by reference-inspired UX choices.'
+  agent: frontend_engineer
+  context:
+  - python_quality_audit
+  - backend_beta_stabilization
+release_readiness_audit:
+  description: Audit whether the browser beta is truly ready to leave the workspace.
+    Separate product quality from release quality, identify tester-friction risks,
+    packaging blockers, runtime assumptions, and unresolved loopholes, then produce
+    a go/no-go verdict with concrete next actions.
+  expected_output: 'A release-readiness audit including: honest go/no-go status, major
+    blockers, tester-friction risks, runtime assumptions, clean-machine risks, packaging
+    gaps, and a prioritized release checklist for the next beta handoff.'
+  agent: release_program_manager
+  context:
+  - backend_beta_stabilization
+  - frontend_beta_experience
+windows_exe_packaging:
+  description: Prepare a Windows-first packaging lane for the browser beta. Define
+    the executable entrypoint, build scripts, bundling assumptions, local data path
+    behavior, and the clean tester experience needed for a proper .exe handoff.
+  expected_output: 'A Windows packaging implementation plan and scaffolding including:
+    .exe entrypoint choice, PyInstaller build assumptions, release script layout,
+    bundled runtime expectations, tester bundle structure, and verification steps
+    for a clean Windows beta build.'
+  agent: windows_packaging_engineer
+  context:
+  - release_readiness_audit
+  - backend_beta_stabilization
+macos_dmg_release_plan:
+  description: Define the realistic macOS release path for the browser beta after
+    the Windows packaging lane is stable. Spell out the build environment needs, .app/.dmg
+    steps, signing and notarization realities, and what must be tested before a Mac
+    beta can be sent out.
+  expected_output: 'A macOS release plan covering: required build environment, .app
+    and .dmg packaging flow, signing/notarization considerations, clean-machine tester
+    expectations, and the exact blockers that remain when working from a Windows-first
+    setup.'
+  agent: macos_release_planner
+  context:
+  - release_readiness_audit
+  - windows_exe_packaging
+strategic_intelligence_report:
+  description: 'Conduct the weekly scan of ArXiv and GitHub trends. Output: One report
+    containing: A) Integration opportunities, B) Patent threat warnings, C) Market
+    validation data.'
+  expected_output: 'Weekly strategic intelligence report including: A) Emerging AI/tech
+    integration opportunities from ArXiv and GitHub, B) Patent threat analysis and
+    competitive landscape warnings, C) Market validation data and adoption trends.
+    Include actionable recommendations and risk assessments for product strategy.'
+  agent: r_d_market_scout
+  context:
+  - cli_core_architecture
+  - local_first_memory_store
+  - optimization_engine_logic
+  - privacy_audit_legal_framework
+  - adaptive_learning_loop
