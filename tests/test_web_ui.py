@@ -5,10 +5,13 @@ from tempfile import TemporaryDirectory
 from project_360_degree_ai_prompt_assistant_platform.prompt_library import LibraryPrompt
 from project_360_degree_ai_prompt_assistant_platform.settings import AppSettings
 from project_360_degree_ai_prompt_assistant_platform.web_ui import (
+    _build_final_prompt_result,
     _effective_library_category,
     _extract_audience_phrase,
+    _fill_template_with_fallbacks,
     _find_template,
     _library_prompt_candidates,
+    _merge_prefills,
     _prefill_field,
     _remote_prompt_from_form,
     _render_library_category_options,
@@ -29,6 +32,92 @@ class WebUiLogicTests(unittest.TestCase):
         product = _prefill_field("product", text, template)
         self.assertIn("website", product.lower())
         self.assertNotIn("i want to", product.lower())
+
+    def test_labeled_screen_text_does_not_leak_into_library_prefills(self) -> None:
+        template = _find_template("product-strategy-brief")
+        self.assertIsNotNone(template)
+        text = (
+            "Topic create an AI business where I am building skills connectors different kinds of products "
+            "Search intent inform and persuade Tone clear and practical "
+            "Call to action produce a clear usable answer"
+        )
+        values = _merge_prefills(current_values={}, template=template, rough_prompt=text)
+        self.assertEqual(values["product"], "an AI business where I am building skills connectors different kinds of products")
+        self.assertNotIn("Search intent", values["product"])
+        self.assertNotIn("Call to action", " ".join(values.values()))
+        self.assertNotIn("action produce", " ".join(values.values()).lower())
+
+    def test_labeled_screen_text_does_not_leak_into_final_prompt_context(self) -> None:
+        template = _find_template("product-strategy-brief")
+        self.assertIsNotNone(template)
+        text = (
+            "Topic create an AI business where I am building skills connectors different kinds of products "
+            "Search intent inform and persuade Tone clear and practical "
+            "Call to action produce a clear usable answer"
+        )
+        values = _merge_prefills(current_values={}, template=template, rough_prompt=text)
+        result = _build_final_prompt_result(
+            rough_prompt=text,
+            inspection=None,
+            template=template,
+            field_values=values,
+            extra_notes="",
+            avoid_text="",
+            lane="library",
+        )
+        final_prompt = result["final_prompt"]
+        self.assertIn("AI business", final_prompt)
+        self.assertNotIn("Search intent", final_prompt)
+        self.assertNotIn("Call to action", final_prompt)
+        self.assertNotIn("action produce", final_prompt.lower())
+
+    def test_ai_business_prompt_does_not_treat_usability_as_audience(self) -> None:
+        template = _find_template("product-strategy-brief")
+        self.assertIsNotNone(template)
+        text = (
+            "create an AI business where I am building skills, connectors, different kinds of products, "
+            "and a rack pipeline by collecting all the AI news on a daily basis, and then the agent will "
+            "filter out the right ideas by understanding gaps in the market and give me three or four "
+            "options which I can start building. I am a non-coder, so this has to be very user-friendly"
+        )
+        values = _merge_prefills(current_values={}, template=template, rough_prompt=text)
+        self.assertIn("AI business", values["product"])
+        self.assertNotIn("very user-friendly", values.get("audience", ""))
+
+    def test_browser_capture_text_is_not_used_as_product_subject(self) -> None:
+        template = _find_template("product-strategy-brief")
+        self.assertIsNotNone(template)
+        text = (
+            "These live in Chrome Edge and are one click. GoFullPage Chrome Edge captures the entire "
+            "current page as PNG or PDF. Built in Microsoft Edge Web Capture screenshot copied to clipboard."
+        )
+        values = _merge_prefills(current_values={}, template=template, rough_prompt=text)
+        self.assertNotIn("Chrome Edge", values.get("product", ""))
+        filled = _fill_template_with_fallbacks(
+            template_text=template["prompt_text"],
+            field_values=values,
+            template=template,
+            rough_prompt=text,
+        )
+        self.assertNotIn("Chrome Edge", filled)
+        self.assertIn("the product or service", filled)
+
+    def test_label_words_inside_real_subjects_are_preserved(self) -> None:
+        template = _find_template("product-strategy-brief")
+        self.assertIsNotNone(template)
+        audience_product = _prefill_field("product", "I want to create an audience research platform for founders", template)
+        tone_product = _prefill_field("product", "I want to build a tone analysis tool for support teams", template)
+        cta_product = _prefill_field("product", "I want to launch a call to action builder for marketers", template)
+        self.assertIn("audience research platform", audience_product)
+        self.assertIn("tone analysis tool", tone_product)
+        self.assertIn("call to action builder", cta_product)
+
+    def test_legitimate_browser_capture_prompt_keeps_subject(self) -> None:
+        template = _find_template("product-strategy-brief")
+        self.assertIsNotNone(template)
+        text = "Help me compare Chrome screenshot capture extensions that export full-page PNG and PDF files"
+        product = _prefill_field("product", text, template)
+        self.assertIn("Chrome screenshot capture extensions", product)
 
     def test_remote_prompt_lookup_returns_cached_prompt(self) -> None:
         prompt = LibraryPrompt(

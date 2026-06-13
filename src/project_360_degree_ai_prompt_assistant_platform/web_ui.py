@@ -132,6 +132,73 @@ MULTILINE_FIELDS = {
 
 DEFAULT_TEMPLATE_ID = "general-repair-basic"
 
+PREFILL_SUBJECT_FIELDS = {"topic", "paper_topic", "initiative", "concept", "task", "service", "product", "offer", "premise"}
+PREFILL_AUDIENCE_FIELDS = {"audience", "recipient_role", "client_type", "stakeholders"}
+PREFILL_LABELS = {
+    "audience": {"audience", "target audience", "recipient", "recipient role", "client type", "stakeholders"},
+    "cta": {"call to action", "cta", "desired action"},
+    "format": {"format", "output format"},
+    "goal": {"goal", "objective", "expected outcome"},
+    "search_intent": {"search intent", "intent"},
+    "subject": {"topic", "task", "product", "service", "offer", "concept", "premise", "initiative"},
+    "tone": {"tone", "voice"},
+}
+PREFILL_LABEL_LOOKUP = {
+    label: group
+    for group, labels in PREFILL_LABELS.items()
+    for label in labels
+}
+SCREEN_NOISE_TERMS = {
+    "browser",
+    "capture",
+    "chrome",
+    "clipboard",
+    "edge",
+    "extension",
+    "gofullpage",
+    "notion page",
+    "pdf",
+    "png",
+    "screenshot",
+    "web capture",
+}
+SCREEN_INTENT_WORDS = {
+    "build",
+    "choose",
+    "compare",
+    "create",
+    "design",
+    "draft",
+    "evaluate",
+    "explain",
+    "find",
+    "help",
+    "launch",
+    "make",
+    "recommend",
+    "review",
+    "rewrite",
+    "select",
+    "write",
+}
+LOW_CONFIDENCE_AUDIENCE_STARTS = (
+    "action ",
+    "be ",
+    "build ",
+    "capture ",
+    "create ",
+    "finish ",
+    "generate ",
+    "help ",
+    "inform ",
+    "make ",
+    "move ",
+    "produce ",
+    "start ",
+    "take ",
+    "use ",
+)
+
 PROMPT_ARCHETYPES = {
     "logical_text": {
         "label": "Logical / Text Framework",
@@ -1476,13 +1543,21 @@ def _merge_prefills(*, current_values: dict[str, str], template: dict[str, Any],
 
 
 def _prefill_field(field_name: str, rough_prompt: str, template: dict[str, Any]) -> str:
-    text = " ".join(rough_prompt.split())
+    text = _sanitize_prefill_source(rough_prompt)
     if not text:
         return ""
     lowered = text.lower()
-    if field_name in {"topic", "paper_topic", "initiative", "concept", "task", "service", "product", "offer", "premise"}:
+    labeled_value = _labeled_prefill_value(field_name=field_name, text=text)
+    if labeled_value is not None:
+        if labeled_value and field_name in PREFILL_SUBJECT_FIELDS:
+            return _extract_subject_phrase(labeled_value, field_name, template["pack"]) or labeled_value
+        return labeled_value
+    if _has_prefill_labels(text) or _looks_like_screen_noise(text):
+        if field_name in PREFILL_SUBJECT_FIELDS | PREFILL_AUDIENCE_FIELDS | {"deliverables", "components", "key_topics", "topics"}:
+            return ""
+    if field_name in PREFILL_SUBJECT_FIELDS:
         return _extract_subject_phrase(text, field_name, template["pack"])
-    if field_name in {"audience", "recipient_role", "client_type", "stakeholders"}:
+    if field_name in PREFILL_AUDIENCE_FIELDS:
         return _extract_audience_phrase(lowered, text)
     if field_name in {"deliverables", "components", "key_topics", "topics"}:
         return _extract_phrase(lowered, text, [" with ", " including ", " that includes "])
@@ -1497,6 +1572,76 @@ def _prefill_field(field_name: str, rough_prompt: str, template: dict[str, Any])
     if field_name == "format":
         return _default_format_for_pack(template["pack"])
     return ""
+
+
+def _sanitize_prefill_source(rough_prompt: str) -> str:
+    text = " ".join(rough_prompt.split())
+    if not text:
+        return ""
+    # Remove OCR/browser chrome artifacts that often wrap copied screenshot text.
+    text = re.sub(r"\b(?:Prompt Assistant Beta|Ask anything|Type / for search modes)\b", " ", text, flags=re.IGNORECASE)
+    return " ".join(text.split())
+
+
+def _has_prefill_labels(text: str) -> bool:
+    return bool(_prefill_label_spans(text))
+
+
+def _labeled_prefill_value(*, field_name: str, text: str) -> str | None:
+    spans = _prefill_label_spans(text)
+    if not spans:
+        return None
+    desired_groups = _desired_label_groups(field_name)
+    for index, (_start, end, group) in enumerate(spans):
+        next_start = spans[index + 1][0] if index + 1 < len(spans) else len(text)
+        value = _trim_labeled_value(text[end:next_start])
+        if group in desired_groups and _confident_prefill_value(field_name, value):
+            return value
+    return ""
+
+
+def _prefill_label_spans(text: str) -> list[tuple[int, int, str]]:
+    spans: list[tuple[int, int, str]] = []
+    lowered = text.lower()
+    for label, group in PREFILL_LABEL_LOOKUP.items():
+        for match in re.finditer(rf"\b{re.escape(label)}\b\s*:?", lowered):
+            matched_text = text[match.start() : match.end()]
+            has_colon = matched_text.rstrip().endswith(":")
+            starts_text = match.start() == 0
+            looks_like_ui_label = text[match.start() : match.start() + 1].isupper()
+            if has_colon or starts_text or looks_like_ui_label:
+                spans.append((match.start(), match.end(), group))
+    spans.sort(key=lambda item: item[0])
+    return spans
+
+
+def _desired_label_groups(field_name: str) -> set[str]:
+    if field_name in PREFILL_SUBJECT_FIELDS:
+        return {"subject"}
+    if field_name in PREFILL_AUDIENCE_FIELDS:
+        return {"audience"}
+    if field_name in {"goal", "desired_action", "expected_outcome"}:
+        return {"goal"}
+    if field_name == "cta":
+        return {"cta"}
+    if field_name == "tone":
+        return {"tone"}
+    if field_name == "search_intent":
+        return {"search_intent"}
+    if field_name == "format":
+        return {"format"}
+    return set()
+
+
+def _confident_prefill_value(field_name: str, value: str) -> bool:
+    cleaned = value.strip()
+    if not cleaned:
+        return False
+    if _looks_like_screen_noise(cleaned):
+        return False
+    if field_name in PREFILL_AUDIENCE_FIELDS and _looks_like_low_confidence_audience(cleaned):
+        return False
+    return True
 
 
 def _extract_phrase(lowered: str, original: str, markers: list[str]) -> str:
@@ -1515,13 +1660,15 @@ def _extract_audience_phrase(lowered: str, original: str) -> str:
     if "writer" in lowered and "director" in lowered:
         return "writers and directors"
     value = _extract_phrase(lowered, original, [" for ", " to "])
-    if value and not _looks_like_product_phrase(value):
+    if value and not _looks_like_product_phrase(value) and not _looks_like_low_confidence_audience(value):
         return value
     return ""
 
 
 def _extract_subject_phrase(original: str, field_name: str, pack_name: str) -> str:
     text = _strip_preface(original)
+    if _looks_like_screen_noise(text):
+        return ""
     lowered = text.lower()
 
     if pack_name in {"Product Strategy Pack", "Business Idea Validation Pack"}:
@@ -1557,9 +1704,49 @@ def _looks_like_product_phrase(value: str) -> bool:
     )
 
 
+def _looks_like_low_confidence_audience(value: str) -> bool:
+    lowered = value.strip().lower()
+    if not lowered:
+        return True
+    if lowered.startswith(LOW_CONFIDENCE_AUDIENCE_STARTS):
+        return True
+    if lowered in {"clear and practical", "inform and persuade", "structured prompt"}:
+        return True
+    return any(label in lowered for label in ["call to action", "search intent", "output format"])
+
+
+def _looks_like_screen_noise(value: str) -> bool:
+    lowered = value.lower()
+    hits = sum(1 for term in SCREEN_NOISE_TERMS if term in lowered)
+    has_user_intent = any(re.search(rf"\b{word}\b", lowered) for word in SCREEN_INTENT_WORDS)
+    return hits >= 3 and not has_user_intent
+
+
 def _trim_clause(text: str) -> str:
     chunk = text.strip(" .,:;-")
     for separator in [" and ", ". ", ", ", " with ", " while ", " but "]:
+        idx = chunk.lower().find(separator)
+        if idx > 0:
+            chunk = chunk[:idx]
+            break
+    return chunk.strip(" .,:;-")
+
+
+def _trim_labeled_value(text: str) -> str:
+    chunk = text.strip(" .,:;-")
+    for separator in [
+        " search intent ",
+        " call to action ",
+        " output format ",
+        " audience ",
+        " tone ",
+        " and ",
+        ". ",
+        ", ",
+        " with ",
+        " while ",
+        " but ",
+    ]:
         idx = chunk.lower().find(separator)
         if idx > 0:
             chunk = chunk[:idx]
@@ -1755,8 +1942,9 @@ def _shared_prompt_context(
         field_values.get("cta"),
         _goal_hint(rough_prompt, template["pack"]),
     )
+    context_source = _prompt_context_source(rough_prompt=rough_prompt, field_values=field_values)
     context_lines = [
-        f"Original user request: {rough_prompt}",
+        f"Original user request: {context_source}",
         f"Matched starter pack: {template['title']} from {template['pack']}",
     ]
     if audience:
@@ -1787,6 +1975,22 @@ def _shared_prompt_context(
         "output_type": output_type,
         "audience": audience,
     }
+
+
+def _prompt_context_source(*, rough_prompt: str, field_values: dict[str, str]) -> str:
+    text = _sanitize_prefill_source(rough_prompt)
+    if not text:
+        return ""
+    if not _has_prefill_labels(text) and not _looks_like_screen_noise(text):
+        return rough_prompt
+    subject_parts = [
+        field_values.get(key, "").strip()
+        for key in ("product", "service", "offer", "topic", "task", "concept", "premise", "initiative")
+        if field_values.get(key, "").strip()
+    ]
+    if subject_parts:
+        return "; ".join(dict.fromkeys(subject_parts))
+    return "Low-confidence pasted screen text; use the explicit fields and template defaults."
 
 
 def _role_for_pack(pack_name: str) -> str:
